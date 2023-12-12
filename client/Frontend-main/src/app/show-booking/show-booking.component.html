@@ -1,0 +1,60 @@
+<div class="container mt-4">
+    <div *ngIf="isBookingsVisible; else elseBlock">
+
+        <h2 style="text-align: center;">Booked Meal History</h2>
+        <div class="table-container">
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Booking ID</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tbody>
+                            <tr *ngFor="let booking of bookedMeals">
+                                <td>{{ booking.bookingId }}</td>
+                                <td>{{ booking.bookingDate }}</td>
+                                <td>
+                                    <button class="btn btn-primary" [disabled]="isButtonDisabled" (click)="toggleQR(booking)">
+                              <fa-icon [icon]="faGift"></fa-icon> Redeem Coupon
+                            </button>
+                                    <button class="btn btn-danger ml-2">
+                              <fa-icon [icon]="faTimes"></fa-icon> Cancel Meal
+                            </button>
+                                </td>
+                            </tr>
+                        </tbody>
+
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <ng-template #elseBlock>
+        <h2>Coupon QR-Scan:</h2>
+
+        <div class="qrPopupContainer">
+            <!-- QR Code container on the left side -->
+            <div class="qrContainer popup" [innerHTML]="qrImage">
+                <!-- QR Code content -->
+            </div>
+
+            <!-- User details container on the right side -->
+            <!-- <div class="userDetails" *ngIf="selectedEmployee">
+                <div class="userDetailItem">Employee ID: {{ selectedEmployee.empId }}</div>
+                <div class="userDetailItem">Employee Name: {{ selectedEmployee.empName }}</div>
+                <div class="userDetailItem">Date: {{ selectedEmployee.date }}</div>
+                 <div class="userDetailItem">Other Data: {{ selectedEmployee.otherData }}</div> 
+            </div> -->
+        </div>
+
+        <!-- Timer section -->
+        <p class="timer" *ngIf="isButtonDisabled">
+            {{ remainingMinutes }} : {{ remainingSeconds }}
+        </p>
+    </ng-template>

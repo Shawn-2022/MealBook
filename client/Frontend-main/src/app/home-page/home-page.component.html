@@ -1,0 +1,54 @@
+<app-header></app-header>
+<div class="MainContainer">
+    <div class="meal-buttons">
+        <button (click)="showForm()" [disabled]="isQuickMealButtonDisabled()"
+            [ngStyle]="{'background-color': isQuickMealButtonDisabled() ? '#808080' : '#A62626'}">Quick Meal</button>
+
+        <div *ngIf="showFormFlag" class="overlay">
+            <div class="popup">
+                <fa-icon class="cancel-icon" [icon]="faXmark" (click)="closeForm()"></fa-icon>
+                <app-quick-meal (formSubmit)="submitForm($event)"></app-quick-meal>
+                <!-- <button class="close-button" (click)="closeForm()">Close</button> -->
+            </div>
+        </div>
+
+        <!-- <button (click)="showFormAdd()" 
+            [ngStyle]="{'background-color': '#10243a'}" >Add Meal</button> -->
+            <button (click)="showFormAdd()">Add Meal</button>
+            <!-- <button class="history-button">Show Booking</button> -->
+
+        <div *ngIf="showFormFlagAdd" class="overlay">
+            <div class="popup">
+                <fa-icon class="cancel-icon" [icon]="faXmark" (click)="closeFormAdd()"></fa-icon>
+
+                <app-add-meal (formSubmit)="submitFormAdd($event)"></app-add-meal>
+                <!-- <button class="close-button" (click)="closeFormAdd()">Close</button> -->
+            </div>
+        </div>
+
+        <button (click)="showFormFlagHistoryLog()">Show Booking</button>
+        <div *ngIf="showFormFlagHistory" class="overlay">
+            <div class="popup">
+                <fa-icon class="cancel-icon" [icon]="faXmark" (click)="closeFormHistory()"></fa-icon>
+                <app-show-booking (formSubmit)="submitFormHistory($event)"></app-show-booking>
+                <!-- <button class="close-button" (click)="closeFormHistory()">Close</button> -->
+            </div>
+        </div>
+        <div class="section">
+            <h2>TODAY'S  MENU :</h2>
+            <img src="https://www.foodandwine.com/thmb/rvRXIM10a3M_jZUtIcFHuXMjGbo=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Making-Waves-Indian-Restaurants-London-Dining-FT-MAG0723-21e40f8b4d234a99bb53edb6608acfab.jpg" alt="Today's Menu Image">
+        </div>
+    </div> 
+
+    <div class="CalenderCss">
+       
+<mat-card class="demo-inline-calendar-card">
+    <mat-calendar
+    [(selected)]="selected"
+    [dateFilter]="DateFilter" (selectedChange)="onDateSelection($event)"></mat-calendar>
+  </mat-card>
+  <p *ngIf="selected">Selected date: {{ selected | date:'mediumDate' }}</p>
+  <p *ngIf="!selected">No date selected</p>
+    </div>
+</div>
+<app-footer></app-footer>

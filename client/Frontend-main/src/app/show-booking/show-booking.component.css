@@ -1,0 +1,65 @@
+.qrPopupContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* QR Code styling */
+
+.qrContainer {
+    width: 50%;
+    /* Adjust the width as needed */
+    padding: 20px;
+}
+
+
+/* User details styling */
+
+.userDetails {
+    width: 50%;
+    /* Adjust the width as needed */
+    padding: 20px;
+    color: black;
+    font-weight: 500;
+    font-size: large;
+}
+
+
+/* Additional styling for user details items */
+
+.userDetailItem {
+    margin-bottom: 10px;
+}
+
+
+/* Timer styling */
+
+.timer {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    color: maroon;
+    font-weight: 700;
+    font-size: x-large;
+}
+
+button {
+    padding: 10px;
+    margin: 5px;
+}
+
+
+/* Add necessary CSS styles for the container */
+
+
+/* Ensure the table itself has a fixed layout and a width */
+
+.table-container {
+    max-height: 350px;
+    /* Set the desired height */
+    /* overflow-y: auto; */
+    overflow: auto;
+}

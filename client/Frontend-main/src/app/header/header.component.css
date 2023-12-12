@@ -1,0 +1,162 @@
+.main-content {
+  margin-left: 250px;
+}
+
+.header {
+  padding: 10px 0;
+  background-color: #400909;
+  color: #D9C6B0;
+  padding: 25px;
+  /* font-weight: 700; */
+}
+
+.company-logo {
+  width: 50px;
+  /* Adjust the maximum width as needed */
+  margin-right: 10px;
+  /* Add some margin to the right of the logo for spacing */
+  margin-top: 14px;
+}
+
+.company-name {
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #D9C6B0;
+  /*Font color*/
+  margin-top: 13px;
+  margin-left: 10px;
+  /* align-items: center; */
+  /* margin-top: 14px; */
+  /* display: flex; */
+
+}
+
+.nav-item {
+  margin-right: 30px;
+  /*to increase  a space between icon */
+  font-size: 25px;
+  /*to increase  a icon size */
+  color: #D9C6B0;
+  margin: 25px;
+}
+
+.fa-icon {
+  font-size: 16px;
+  color: #999;
+
+}
+
+/*for button bar*/
+.nav-link {
+  /* padding: 0; */
+  margin: 20px;
+  /*to increase  a space between icon */
+  font-size: 25px;
+  /*to increase  a icon size */
+  /* margin: 10px; */
+}
+
+.sidenav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #452020;
+  border-right: 1px solid #ddd;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  padding: 15px;
+  /* Reduced padding to 5px */
+}
+
+.sidenav a {
+  display: block;
+  padding: 10px 15px;
+  /* Reduced padding to 10px */
+  /* color: #333; */
+  font-weight: 500;
+  font-size: 18px;
+  text-decoration: none;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 25px;
+  /* Reduced margin to 5px */
+}
+
+.sidenav a:hover {
+  background-color: #f1f1f1;
+}
+
+.sidenav a .fa-icon {
+  font-size: 20px;
+  /* color: #999; */
+  margin-right: 15px;
+}
+
+
+.row.header a.nav-item:hover,
+.row.header button.nav-link:hover {
+  color: #f1f1f1;
+}
+
+.nav-link:hover {
+  color: #f1f1f1;
+
+}
+
+/* Add these styles to your component's CSS file or the global styles file */
+/* Your CSS styles */
+/* Your CSS styles */
+/* Your CSS styles */
+.notification-list-container {
+  display: none;
+  position: absolute;
+  top: 83px;
+  right: 228px;
+  color: black;
+  background-color: whitesmoke;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgb(95, 7, 7,0.4);
+  max-height: 250px;
+  z-index: 1000;
+  width: 300px;
+  padding: 10px;
+
+}
+
+.notification-list-container.show {
+  display: block;
+}
+
+.notification-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+}
+
+.notification-item {
+  padding: 10px;
+  border-bottom: 2px solid #340e0e;
+  font-size: 14px;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-item div {
+  position: relative; /* Relative positioning for absolute positioning of close button */
+}
+
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #4d0e0e; /* Adjust the close button color */
+}

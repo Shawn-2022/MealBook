@@ -1,0 +1,18 @@
+<form [formGroup]="mealFormAdd" (ngSubmit)="onSubmitAdd()">
+    <mat-form-field>
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker" [dateFilter]="dateFilter" formGroupName="dateRange">
+        <input matStartDate placeholder="Start date" formControlName="matStartDate">
+        <input matEndDate placeholder="End date" formControlName="matEndDate">
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY - MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+    <br/>
+    <div>
+      <p>Total selected days: {{ totalDaysSelected }}</p>
+    </div>
+      <br />
+      <button type="button" class="btn btn-dark">Submit</button>
+    </form>

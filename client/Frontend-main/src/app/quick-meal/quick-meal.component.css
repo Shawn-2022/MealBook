@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+select {
+    padding: 5px;
+}
+input[type="date"] {
+    padding: 5px;
+}
+
+/* Style for blocked weekends */
+input[type="date"].blocked-weekend {
+    color: #888; /* Change the color as needed */
+}
+.weekend {
+    background-color: #ffc0c0; /* Light red color for blocked weekends */
+    color: #ff0000; /* Text color for better visibility */
+  }
+  ::ng-deep .mat-calendar {
+    /* background-color: #f0eeeb; */
+    color: black;
+    /* font-weight: bold; */
+  }
+  
+  ::ng-deep .mat-calendar-body-selected,
+  ::ng-deep .mat-calendar-body-selected:hover {
+    background-color: maroon !important;
+    color: white; /* Set text color for better visibility */
+  }
+  
+  ::ng-deep .mat-calendar-body-cell:hover:not(.mat-calendar-body-disabled) {
+    background-color: maroon;
+    color: white; /* Set text color for better visibility */
+    border-radius: 50%; /* Make it circular */
+  }
+  
+  ::ng-deep .mat-calendar-body-cell.mat-calendar-body-selected {
+    background-color: maroon !important;
+    color: white; /* Set text color for better visibility */
+  }
+  
+  ::ng-deep .mat-calendar-body-cell.mat-calendar-body-selected:hover {
+    background-color: maroon !important;
+    color: white; /* Set text color for better visibility */
+  }
+  

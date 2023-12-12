@@ -1,0 +1,12 @@
+{
+    "/api": {
+      "target": "http://localhost:9090/empRegister",
+      "secure": false
+    },
+    "/api": {
+        "target": "http://localhost:9090/mealBooking/auth/authenticate",
+        "secure": false
+      }
+  }
+
+ 

@@ -1,0 +1,26 @@
+::ng-deep .mat-calendar {
+    /* background-color: #f0eeeb; */
+    color: black;
+    /* font-weight: bold; */
+  }
+  ::ng-deep .mat-calendar-body-selected {
+    background-color:#A62626ed;
+    color: white; /* Set text color for better visibility */
+  }
+  ::ng-deep .mat-calendar-body-selected:hover {
+  background-color: rgb(172, 63, 63);
+  color: white; /* Set text color for better visibility */
+}
+::ng-deep .mat-calendar-body-cell:hover:not(.mat-calendar-body-disabled) {
+    background-color: maroon;
+    color: white; /* Set text color for better visibility */
+    border-radius: 50%; /* Make it circular */
+
+  }
+
+  ::ng-deep .mat-calendar-body-cell.mat-calendar-body-today:hover {
+    background-color: maroon;
+    color: white; /* Set text color for better visibility */
+  }
+ 
+  

@@ -1,0 +1,62 @@
+<div class="container-fluid">
+    <div class="row header">
+        <div class="col-6">
+            <img src="../../assets/Images/MealLog.png" alt="Company Logo" class="company-logo">
+
+            <a class="company-name" href="#">Meal Booking</a>
+        </div>
+        <div class="col-6 d-flex justify-content-end">
+            <a class="nav-item mr-2" (click)="toggleNotificationList()">
+                <fa-icon [icon]="faBell"></fa-icon>
+                <div class="notification-list-container" [ngClass]="{'show': showNotificationList}">
+                    <ul class="notification-list">
+                        <li *ngFor="let notification of notifications.slice(0, 5); let i = index" class="notification-item">
+                            <div>
+                                <span>{{ notification }}</span>
+                                <span class="close-button" (click)="removeNotification(i)">&times;</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </a>
+
+            <a class="nav-item mr-2" href="#">
+                <fa-icon [icon]="faUser"></fa-icon>
+            </a>
+            <button class="nav-link mr-2" type="button" (click)="toggleSidebar()">
+        <fa-icon [icon]="faBars" style="color: #D9C6B0"></fa-icon>
+      </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 sidenav" *ngIf="isSidebarOpen">
+            <!-- <a class="nav-item d-flex align-items-center" [routerLink]="['about-us']"> -->
+            <a class="nav-item d-flex align-items-center" [routerLink]="'/Home'">
+                <fa-icon [icon]="faHome"></fa-icon>
+                <span class="ml-2">Home</span>
+            </a>
+            <a class="nav-item d-flex align-items-center" [routerLink]="'/about-us'">
+                <fa-icon [icon]="faInfoCircle"></fa-icon>
+                <span class="ml-2">About Us</span>
+            </a>
+            <a class="nav-item d-flex align-items-center" routerLink="/terms-condition">
+                <fa-icon [icon]="faFileContract"></fa-icon>
+                <span class="ml-2">Terms & Conditions</span>
+            </a>
+            <a class="nav-item d-flex align-items-center" routerLink="/privacy-policy">
+                <fa-icon [icon]="faLock"></fa-icon>
+                <span class="ml-2">Privacy Policy</span>
+            </a>
+            <a class="nav-item d-flex align-items-center" routerLink="/change-password">
+                <fa-icon [icon]="faKey"></fa-icon>
+                <span class="ml-3">Change Password</span>
+            </a>
+            <a class="nav-item d-flex align-items-center" routerLink="/">
+                <fa-icon [icon]="faPowerOff"></fa-icon>
+                <span class="ml-3">Logout</span>
+            </a>
+        </div>
+        <div class="col-9 main-content">
+        </div>
+    </div>
+</div>
