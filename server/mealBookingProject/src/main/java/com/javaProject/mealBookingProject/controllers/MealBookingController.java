@@ -1,5 +1,6 @@
 package com.javaProject.mealBookingProject.controllers;
 
+import com.javaProject.mealBookingProject.customExceptions.UserNotFoundException;
 import com.javaProject.mealBookingProject.dto.cancelBookingDto;
 import com.javaProject.mealBookingProject.dto.createBookingRequestDto;
 import com.javaProject.mealBookingProject.dto.redeemDto;
@@ -15,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
 import java.util.List;
 
+//nishi
 @RestController
 @RequestMapping("mealBooking/meal")
 public class MealBookingController {
@@ -58,43 +60,4 @@ public class MealBookingController {
         return new ResponseEntity<>(bookingHistory, HttpStatus.OK);
     }
 
-    //redeem
-    @GetMapping("/getBooking/{bookingDate}")
-    public ResponseEntity<Object> redeemBooking(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingDate)
-    {
-        {
-            try {
-                redeemDto bookingDto = mealBookingService.getBookingByUserAndDate(bookingDate);
-                return ResponseEntity.ok(bookingDto);
-            } catch (RuntimeException e) {
-                // Handle the exception or log an error
-                e.printStackTrace();
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-            }
-        }
-    }
-
-    @DeleteMapping("/redeemedBooking")
-    public ResponseEntity<String> redeemedMealBooking(@RequestBody redeemDto redeemed)
-    {
-        try {
-            ResponseEntity<String> booking = mealBookingService.getRedeemConfirmation(redeemed);
-            return booking;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while redeeming the booking."+e);
-        }
-    }
-
-    @PutMapping("/expireBooking")
-    public ResponseEntity<String> expireBooking(@RequestBody redeemDto redeemed){
-        try {
-            ResponseEntity<String> result = mealBookingService.expireCouponIfApplicable(redeemed);
-
-            return result;
-        } catch (Exception e) {
-        e.printStackTrace();
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while redeeming the booking."+e);
-        }
-    }
 }

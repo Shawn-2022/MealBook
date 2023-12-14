@@ -22,6 +22,7 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -80,7 +81,7 @@ public class MealBookingService {
                 var notification = NotificationTable.builder()
                         .userID(user)
                         .role(user.getRole().name())
-                        .message("For UserID " + userId + " " + user.getUser_Name() + " booking has been successfully on " + date)
+                        .message("For UserID " + userId + " " + user.getFirstName() + " booking has been successfully on " + date)
                         .unread(true)
                         .build();
                 notificationRepository.save(notification);
@@ -132,7 +133,7 @@ public class MealBookingService {
                 var notification = NotificationTable.builder()
                         .userID(user)
                         .role(user.getRole().name())
-                        .message("For UserID " +userID+" "+ user.getUser_Name()+" booking has been successfully cancel for "+cancelDate)
+                        .message("For UserID " +userID+" "+ user.getFirstName()+" booking has been successfully cancel for "+cancelDate)
                         .unread(true)
                         .build();
                 notificationRepository.save(notification);
@@ -169,148 +170,6 @@ public class MealBookingService {
             throw new RuntimeException("Failed to fetch booking history");
         }
     }
-
-    //redemption coupon
-    public redeemDto getBookingByUserAndDate(LocalDate bookingDate){
-        Long userId = (Long) request.getAttribute("userId");
-        try {
-
-            // User Existence
-            UserTable user = userTableRepository.findById(userId)
-                    .orElseThrow(()  ->new UserNotFoundException("User not found with email: " + userId));
-
-            // Find Booking for User
-            List<MealBookingTable> booking = mealBookingTableRepository.findByUserID(user);
-
-            // Filter Booking by booking Date
-            Optional<MealBookingTable> bookingForDate = booking.stream()
-                    .filter(meal -> meal.getBookingDate().equals(bookingDate))
-                    .findFirst();
-
-            if (bookingForDate.isPresent()) {
-                // Booking found for the specified date and user
-                MealBookingTable mealCoupon = bookingForDate.get();
-                var notification = NotificationTable.builder()
-                        .userID(user)
-                        .role(user.getRole().name())
-                        .message("For UserID " + userId + " " + user.getUser_Name() + " booking coupon generation successfully " + bookingDate)
-                        .unread(true)
-                        .build();
-                notificationRepository.save(notification);
-                var coupon = redeemDto.builder()
-                        .userID(user.getUserID())
-                        .userName(user.getUser_Name())
-                        .Coupon(mealCoupon.getQrCode())
-                        .bookingDate(mealCoupon.getBookingDate())
-                        .bookingId(mealCoupon.getBookingID())
-                        .build();
-                return coupon;
-            }
-            else {
-                return null;
-            }
-        } catch (Exception e) {
-            // Handle the exception or log an error
-            e.printStackTrace();
-            throw new RuntimeException("Failed to fetch booking for user and date");
-        }
-    }
-
-    //redemption success
-    public ResponseEntity<String> getRedeemConfirmation(redeemDto redeem){
-        Long userId = (Long) request.getAttribute("userId");
-        try {
-            // User Existence
-            UserTable user = userTableRepository.findById(userId)
-                    .orElseThrow(()  ->new UserNotFoundException("User not found with email: " + userId));
-
-            // Find Booking for User
-            List<MealBookingTable> booking = mealBookingTableRepository.findByUserID(user);
-//          Optional<MealBookingTable> booking = mealBookingTableRepository.findByUserIDAndBookingDate(user, redeem.getBookingDate());
-
-            // Filter Booking by redeem Date
-            Optional<MealBookingTable> redeemDate = booking.stream()
-                    .filter(meal -> meal.getBookingDate().equals(redeem.getBookingDate()))
-                    .findFirst();
-
-            if (redeemDate.isPresent()) {
-                // Booking found for the specified date and user
-                MealBookingTable mealCoupon = redeemDate.get();
-                var notification = NotificationTable.builder()
-                        .userID(user)
-                        .role(user.getRole().name())
-                        .message("For UserID " + userId + " " + user.getUser_Name() + " booking coupon Redeemed successfully " + redeem.getBookingDate())
-                        .unread(true)
-                        .build();
-                notificationRepository.save(notification);
-
-                var redeemed = MealBookingLog.builder()
-                        .mealBookingID(mealCoupon.getBookingID())
-                        .status(MealBookingLog.Status.REDEEMED)
-                        .build();
-
-                mealBookingLogRepository.save(redeemed);
-                mealBookingTableRepository.delete(mealCoupon);
-                return ResponseEntity.ok("Booking Redeemed successfully.");
-            }
-            else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No booking found for the specified date and user.");
-            }
-        } catch (Exception e) {
-            // Handle the exception or log an error
-            e.printStackTrace();
-            throw new RuntimeException("Failed to fetch booking for user and date");
-        }
-
-    }
-
-    //redemption expired
-    public ResponseEntity<String> expireCouponIfApplicable(redeemDto redeem) {
-        Long userId = (Long) request.getAttribute("userId");
-        try {
-            // User Existence
-            UserTable user = userTableRepository.findById(userId)
-                    .orElseThrow(() ->new UserNotFoundException("User not found with email: " + userId));
-
-            // Find Booking for User
-            List<MealBookingTable> booking = mealBookingTableRepository.findByUserID(user);
-
-            // Filter Booking by redeem Date
-            Optional<MealBookingTable> redeemDate = booking.stream()
-                    .filter(meal -> meal.getBookingDate().equals(redeem.getBookingDate()))
-                    .findFirst();
-
-            if (redeemDate.isPresent()) {
-                // Booking found for the specified date and user
-                MealBookingTable mealCoupon = redeemDate.get();
-
-                var notification = NotificationTable.builder()
-                        .userID(user)
-                        .role(user.getRole().name())
-                        .message("For UserID " + userId + " " + user.getUser_Name() + " booking coupon Expired " + redeem.getBookingDate())
-                        .unread(true)
-                        .build();
-                notificationRepository.save(notification);
-
-                var expiredCoupon = MealBookingLog.builder()
-                        .mealBookingID(mealCoupon.getBookingID())
-                        .status(MealBookingLog.Status.EXPIRED)  // Change status to EXPIRED
-                        .build();
-
-                mealBookingLogRepository.save(expiredCoupon);
-                mealBookingTableRepository.delete(mealCoupon);
-                return ResponseEntity.ok("Booking expired successfully.");
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No booking found for the specified date and user.");
-            }
-        } catch (Exception e) {
-            // Handle the exception or log an error
-            e.printStackTrace();
-            throw new RuntimeException("Failed to fetch booking for user and date");
-        }
-    }
-
-
     // method to set it as expired / auto expire
 
 

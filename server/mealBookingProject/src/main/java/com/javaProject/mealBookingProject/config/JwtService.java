@@ -38,7 +38,6 @@ public class JwtService {
                 .setSubject(userTable.getUsername())
                 .claim("Role", userTable.getRole().name())
                 .claim("Email", userTable.getEmail())
-                .claim("User_name",userTable.getUser_Name())
                 .claim("User_ID",userTable.getUserID())
                 .setIssuedAt(now)
                 .setExpiration(expiration)

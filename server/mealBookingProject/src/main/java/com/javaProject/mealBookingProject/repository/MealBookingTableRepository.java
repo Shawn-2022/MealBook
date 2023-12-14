@@ -3,6 +3,7 @@ package com.javaProject.mealBookingProject.repository;
 import com.javaProject.mealBookingProject.entity.MealBookingTable;
 import com.javaProject.mealBookingProject.entity.UserTable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -15,4 +16,6 @@ public interface MealBookingTableRepository extends JpaRepository<MealBookingTab
     Optional<MealBookingTable> findByUserIDAndBookingDate(UserTable user, LocalDate bookingDate);
 
     List<MealBookingTable> findByUserID(UserTable user);
+
+    Optional<MealBookingTable> findByBookingID(Long bookingID);
 }

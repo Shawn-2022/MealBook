@@ -45,7 +45,8 @@ public class AuthenticationService {
         var user = UserTable.builder()
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .user_Name(request.getUser_name())
+                .firstName(request.getFirstname())
+                .lastName(request.getLastname())
                 .role(UserTable.UserRole.ROLE_EMPLOYEE)
                 .build();
 
@@ -93,43 +94,4 @@ public class AuthenticationService {
                 .token(jwtToken).build();
     }
 
-
-    public PasswordChangeResponseDto changePassword(PasswordChangeRequestDto passwordChangeRequestDto) {
-        Long userId = (Long) request.getAttribute("userId");
-        UserTable user = userTableRepository.findById(userId)
-                .orElseThrow(() ->  new UserNotFoundException("User not found with email: " + userId));
-        String oldPassword = passwordChangeRequestDto.getOldPassword();
-        String newPassword = passwordChangeRequestDto.getNewPassword();
-
-        String storedPassword = user.getPassword();
-        // Verify the old password
-        if (oldPassword == null || !passwordEncoder.matches(oldPassword, storedPassword)) {
-            throw new IncorrectOldPasswordException("Incorrect old password");
-        }
-
-        String encodedOldPassword = passwordEncoder.encode(oldPassword);
-        String encodedNewPassword = passwordEncoder.encode(newPassword);
-
-        // Update the password
-        user.setPassword(encodedNewPassword);
-        userTableRepository.save(user);
-
-        PasswordChangeLog passwordChangeLog = PasswordChangeLog.builder()
-                .oldPassword(encodedOldPassword)
-                .newPassword(encodedNewPassword)
-                .changeDate(new Timestamp(System.currentTimeMillis()))
-                .userEmail(user)
-                .build();
-        passwordChangeLogRepository.save(passwordChangeLog);
-
-        NotificationTable notificationTable= NotificationTable.builder()
-                .role(user.getRole().name())
-                .userID(user)
-                .unread(true)
-                .message(user.getUser_Name()+" Changed Password on" +passwordChangeLog.getChangeDate())
-                .build();
-        notificationRepository.save(notificationTable);
-
-        return new PasswordChangeResponseDto("Password changed successfully");
-    }
 }

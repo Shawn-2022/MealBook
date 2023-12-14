@@ -17,16 +17,11 @@ import java.time.LocalDate;
 public class MealBookingTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long BookingID;
+    private long bookingID;
 
     @ManyToOne
     @JoinColumn(name = "UserID", referencedColumnName = "UserID")
     private UserTable userID;
-
-    //set the date to the day the meal is booked
-    @CurrentTimestamp
-    @Column(name = "createdDate")
-    private Timestamp createdDate;
 
     //for which date the meal is booked
     @Column(name = "BookingDate")

@@ -25,8 +25,8 @@ public class UserTable implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long UserID;
 
-    private String user_Name;
-    //divide in first and last
+    private String firstName;
+    private String lastName;
 
     @Email(message = "Invalid email address")
     @NotBlank(message = "Email is required")

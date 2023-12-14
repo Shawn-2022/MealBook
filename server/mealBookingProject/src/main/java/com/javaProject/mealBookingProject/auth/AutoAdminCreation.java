@@ -25,7 +25,8 @@ public class AutoAdminCreation {
             UserTable admin = new UserTable();
             admin.setEmail("admin@gmail.com");
             admin.setUserID(1l);
-            admin.setUser_Name("Shyam");
+            admin.setFirstName("Shyam");
+            admin.setLastName("Joshi");
             admin.setRole(UserTable.UserRole.ROLE_ADMIN);
             admin.setPassword(new BCryptPasswordEncoder().encode("admin"));
             userTableRepository.save(admin);

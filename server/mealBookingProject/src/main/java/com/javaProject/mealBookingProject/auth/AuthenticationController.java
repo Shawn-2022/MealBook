@@ -15,16 +15,17 @@ public class AuthenticationController {
     @Autowired
     private final AuthenticationService authenticationService;
 
+    //shyam
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/empRegister")
     public ResponseEntity<AuthResponse> employeeRegister(@RequestBody registerRequest request){
         return ResponseEntity.ok(authenticationService.register(request));
     }
 
-
-    @GetMapping("/hello")
-    public ResponseEntity<String> sayHello() {
-        return ResponseEntity.ok("Hello from secured endpoint");
-    }
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @GetMapping("/hello")
+//    public ResponseEntity<String> sayHello() {
+//        return ResponseEntity.ok("Hello to admin");
+//    }
 
 }

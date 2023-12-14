@@ -32,7 +32,7 @@ public class SecurityConfig {
 //                .requestMatchers("/auth/authenticate").permitAll() // Allow anyone to access /auth/authenticate
 //                .requestMatchers("/auth/empRegister").hasRole("ADMIN") // Require Admin role for /auth/empRegister
 //                .anyRequest().authenticated()
-                .requestMatchers("mealBooking/auth/**").permitAll()
+                .requestMatchers("mealBooking/login").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

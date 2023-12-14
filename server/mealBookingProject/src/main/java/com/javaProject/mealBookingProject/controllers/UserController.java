@@ -1,5 +1,8 @@
 package com.javaProject.mealBookingProject.controllers;
 
+import com.javaProject.mealBookingProject.auth.AuthenticationService;
+import com.javaProject.mealBookingProject.auth.authDto.PasswordChangeRequestDto;
+import com.javaProject.mealBookingProject.auth.authDto.PasswordChangeResponseDto;
 import com.javaProject.mealBookingProject.customExceptions.NotificationNotFoundException;
 import com.javaProject.mealBookingProject.customExceptions.UserNotFoundException;
 import com.javaProject.mealBookingProject.dto.NotificationDto;
@@ -8,6 +11,8 @@ import com.javaProject.mealBookingProject.entity.NotificationTable;
 import com.javaProject.mealBookingProject.entity.UserTable;
 import com.javaProject.mealBookingProject.repository.NotificationRepository;
 import com.javaProject.mealBookingProject.repository.UserTableRepository;
+import com.javaProject.mealBookingProject.service.homeService;
+import com.javaProject.mealBookingProject.service.passwordService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,25 +28,21 @@ import java.util.stream.Collectors;
 @RequestMapping("mealBooking/home")
 public class UserController {
 
-    private final UserTableRepository userTableRepository;
-    private final NotificationRepository notificationRepository;
+    @Autowired
+    private final homeService homeservice;
+    private final passwordService changePassword;
+
+    private AuthenticationService authenticationService;
 
     @Autowired
     private HttpServletRequest request;
 
+    //shyam
     // get user by id
     @GetMapping("/getUser")
     public ResponseEntity<UserDto> getUserById() {
         Long userId = (Long) request.getAttribute("userId");
-
-        UserTable user = userTableRepository.findById(userId).orElseThrow(() ->  new UserNotFoundException("User not found with email: " + userId));
-
-        var userInfo = UserDto.builder()
-                .User_ID(user.getUserID())
-                .user_email(user.getEmail())
-                .User_name(user.getUser_Name())
-                .role(user.getRole().name())
-                .build();
+        UserDto userInfo = homeservice.getUserById(userId);
         if (userInfo != null) {
             return ResponseEntity.ok(userInfo);
         } else {
@@ -49,40 +50,14 @@ public class UserController {
         }
     }
 
-    @GetMapping("/notification")
-    public ResponseEntity<List<NotificationDto>> getUnreadNotificationsByUserId() {
-        Long userId = (Long) request.getAttribute("userId");
-        UserTable user = userTableRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("User not found with ID: " + userId));
 
-        List<NotificationTable> unreadNotifications = notificationRepository.getByUserIDAndUnread(user, true);
-
-        if (unreadNotifications != null && !unreadNotifications.isEmpty()) {
-            List<NotificationDto> notificationDtos = unreadNotifications.stream()
-                    .map(notification -> new NotificationDto(
-                            notification.getRole(),
-                            notification.isUnread(),
-                            notification.getMessage()))
-                    .collect(Collectors.toList());
-
-            return ResponseEntity.ok(notificationDtos);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    //Jayati
+    @PostMapping("/change-password")
+    public PasswordChangeResponseDto changePassword(@RequestBody PasswordChangeRequestDto passwordChangeRequest) {
+        return changePassword.changePassword(passwordChangeRequest);
     }
 
 
-    @PutMapping("/notification/{id}")
-    public ResponseEntity<String> updateNotificationStatus(@PathVariable Long id) {
-        // Get the notification by ID from the repository
-        NotificationTable notification = notificationRepository.findById(id)
-                .orElseThrow(() -> new NotificationNotFoundException("Notification not found with ID: " + id));
 
-        // Update the notification status to unread=false
-        notification.setUnread(false);
-        notificationRepository.save(notification);
-
-        return ResponseEntity.ok("Notification status updated successfully");
-    }
 
 }

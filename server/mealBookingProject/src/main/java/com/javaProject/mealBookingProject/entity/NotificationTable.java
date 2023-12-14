@@ -18,7 +18,7 @@ public class NotificationTable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long NotificationId;
+    private Long notificationId;
 
     @CurrentTimestamp
     private LocalDateTime date;

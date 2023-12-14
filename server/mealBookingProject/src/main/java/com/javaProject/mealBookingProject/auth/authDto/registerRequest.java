@@ -13,5 +13,6 @@ public class registerRequest {
 
     private String email;
     private String password;
-    private String user_name;
+    private String firstname;
+    private String lastname;
 }

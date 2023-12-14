@@ -14,6 +14,8 @@ public class redeemDto {
     private Long bookingId;
     private LocalDate bookingDate;
     private Long userID;
-    private String userName;
+
+    private String firstName;
+    private String lastName;
     private String Coupon;
 }
