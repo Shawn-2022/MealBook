@@ -1,7 +1,7 @@
 package com.javaProject.mealBookingProject.service;
 
-import com.javaProject.mealBookingProject.auth.authDto.PasswordChangeRequestDto;
-import com.javaProject.mealBookingProject.auth.authDto.PasswordChangeResponseDto;
+import com.javaProject.mealBookingProject.dto.PasswordChangeRequestDto;
+import com.javaProject.mealBookingProject.dto.PasswordChangeResponseDto;
 import com.javaProject.mealBookingProject.customExceptions.IncorrectOldPasswordException;
 import com.javaProject.mealBookingProject.customExceptions.UserNotFoundException;
 import com.javaProject.mealBookingProject.entity.NotificationTable;
@@ -21,9 +21,13 @@ import java.sql.Timestamp;
 @RequiredArgsConstructor
 public class passwordService {
 
+    @Autowired
     private final PasswordEncoder passwordEncoder;
+    @Autowired
     private final UserTableRepository userTableRepository;
+    @Autowired
     private final PasswordChangeLogRepository passwordChangeLogRepository;
+    @Autowired
     private final NotificationRepository notificationRepository;
     @Autowired
     private HttpServletRequest request;

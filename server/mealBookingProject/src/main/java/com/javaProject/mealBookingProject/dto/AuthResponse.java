@@ -1,4 +1,4 @@
-package com.javaProject.mealBookingProject.auth.authDto;
+package com.javaProject.mealBookingProject.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class authRequest {
-    private String email;
-    private String password;
+public class AuthResponse {
+
+    private String token;
 }

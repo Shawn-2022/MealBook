@@ -1,4 +1,4 @@
-package com.javaProject.mealBookingProject.auth.authDto;
+package com.javaProject.mealBookingProject.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PasswordChangeRequestDto {
-    private String oldPassword;
-    private String newPassword;
+public class PasswordChangeResponseDto {
+    private String message;
+
 }

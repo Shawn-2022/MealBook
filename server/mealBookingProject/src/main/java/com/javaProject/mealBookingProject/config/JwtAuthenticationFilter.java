@@ -22,7 +22,7 @@ import java.util.Map;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
-    private final UserDetailsService userDetailsService; // Assuming you have this bean configured
+    private final UserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(
@@ -74,4 +74,3 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 }
-// userID extraction needs adjust

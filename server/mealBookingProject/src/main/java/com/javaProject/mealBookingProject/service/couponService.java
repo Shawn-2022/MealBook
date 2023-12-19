@@ -26,9 +26,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class couponService {
 
+    @Autowired
     private final MealBookingTableRepository mealBookingTableRepository;
+    @Autowired
     private final UserTableRepository userTableRepository;
+    @Autowired
     private final MealBookingLogRepository mealBookingLogRepository;
+    @Autowired
     private final NotificationRepository notificationRepository;
 
     @Autowired
@@ -51,7 +55,8 @@ public class couponService {
                     .filter(meal -> meal.getBookingDate().equals(bookingDate))
                     .findFirst();
 
-            if (bookingForDate.isPresent()) {
+//            if (bookingForDate.isPresent()&& bookingForDate.get().getBookingDate().isEqual(LocalDate.now()) ) {
+            if (bookingForDate.isPresent() ) {
                 // Booking found for the specified date and user
                 MealBookingTable mealCoupon = bookingForDate.get();
                 var notification = NotificationTable.builder()

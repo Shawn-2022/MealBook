@@ -22,7 +22,7 @@ public class couponController {
     //shyam
     //redeem
     @GetMapping("/Coupon/{bookingDate}")
-    public ResponseEntity<Object> redeemBooking(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingDate)
+    public ResponseEntity<redeemDto> redeemBooking(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bookingDate)
     {
         {
             try {

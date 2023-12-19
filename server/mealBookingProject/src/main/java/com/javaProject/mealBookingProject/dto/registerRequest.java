@@ -1,4 +1,4 @@
-package com.javaProject.mealBookingProject.auth.authDto;
+package com.javaProject.mealBookingProject.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -9,6 +9,7 @@ import com.javaProject.mealBookingProject.entity.UserTable;
 import com.javaProject.mealBookingProject.repository.NotificationRepository;
 import com.javaProject.mealBookingProject.repository.UserTableRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class notificationService {
 
+    @Autowired
     private final NotificationRepository notificationRepository;
+    @Autowired
     private final UserTableRepository userTableRepository;
 
     public List<NotificationDto> getUnreadNotificationsByUserId(Long userId) {

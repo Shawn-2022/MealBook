@@ -1,10 +1,10 @@
 package com.javaProject.mealBookingProject.auth;
 
-import com.javaProject.mealBookingProject.auth.authDto.*;
 import com.javaProject.mealBookingProject.config.JwtService;
 import com.javaProject.mealBookingProject.customExceptions.*;
-import com.javaProject.mealBookingProject.entity.NotificationTable;
-import com.javaProject.mealBookingProject.entity.PasswordChangeLog;
+import com.javaProject.mealBookingProject.dto.AuthResponse;
+import com.javaProject.mealBookingProject.dto.authRequest;
+import com.javaProject.mealBookingProject.dto.registerRequest;
 import com.javaProject.mealBookingProject.entity.UserTable;
 import com.javaProject.mealBookingProject.repository.NotificationRepository;
 import com.javaProject.mealBookingProject.repository.PasswordChangeLogRepository;
@@ -17,8 +17,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.sql.Timestamp;
 
 @Service
 @RequiredArgsConstructor

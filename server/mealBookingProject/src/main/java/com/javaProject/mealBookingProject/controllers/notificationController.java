@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 @RequestMapping("mealBooking/home")
 public class notificationController {
 
+    @Autowired
     private final notificationService notification;
 
     @Autowired

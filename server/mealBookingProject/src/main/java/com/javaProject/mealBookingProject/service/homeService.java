@@ -11,6 +11,7 @@ import com.javaProject.mealBookingProject.repository.MealBookingTableRepository;
 import com.javaProject.mealBookingProject.repository.NotificationRepository;
 import com.javaProject.mealBookingProject.repository.UserTableRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,9 +23,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class homeService {
 
+    @Autowired
     private final UserTableRepository userTableRepository;
+    @Autowired
     private final MealBookingTableRepository mealBookingTableRepository;
+    @Autowired
     private final NotificationRepository notificationRepository;
+    @Autowired
     private final MealBookingLogRepository mealBookingLogRepository;
 
 

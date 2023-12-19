@@ -39,9 +39,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MealBookingService {
 
+    @Autowired
     private final MealBookingTableRepository mealBookingTableRepository;
+    @Autowired
     private final UserTableRepository userTableRepository;
+    @Autowired
     private final MealBookingLogRepository mealBookingLogRepository;
+    @Autowired
     private final NotificationRepository notificationRepository;
 
     @Autowired

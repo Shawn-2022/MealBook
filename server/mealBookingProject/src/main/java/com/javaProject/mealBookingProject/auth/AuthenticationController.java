@@ -1,6 +1,7 @@
 package com.javaProject.mealBookingProject.auth;
 
-import com.javaProject.mealBookingProject.auth.authDto.*;
+import com.javaProject.mealBookingProject.dto.AuthResponse;
+import com.javaProject.mealBookingProject.dto.registerRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
